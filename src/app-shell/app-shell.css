@@ -1,0 +1,36 @@
+#main-container {
+	width: min(500px, 100vw);
+	height: min(500px, 100vw);
+	margin: 0 auto;
+}
+
+header {
+	padding: 12px 0;
+	display: flex;
+}
+
+#board {
+	width: inherit;
+	height: inherit;
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+	--md-elevation-level: 3;
+}
+
+.square {
+	width: calc(100% / 8);
+	height: calc(100% / 8);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.light.square {
+	background-color: var(--md-sys-color-surface-container-lowest);
+}
+.dark.square {
+	background-color: var(--md-sys-color-primary);
+	color: var(--md-sys-color-on-primary);
+}
