@@ -9,3 +9,6 @@ import {app} from './app-shell/app-shell.js';
 document.querySelector<HTMLElement>('material-shell').appendChild(app);
 /** or Firebase */
 // import "./firebase/onAuthStateChanged.js";
+
+import './global-listeners.js';
+import './material/material.js';

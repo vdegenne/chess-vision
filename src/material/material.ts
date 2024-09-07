@@ -7,7 +7,7 @@
  * be bundled inside the final builds...
  */
 import '@material/web/all.js';
-import {DEV} from './constants.js';
+import {DEV} from '../constants.js';
 
 // This is used during development to see what elements are used in the page.
 if (DEV) {

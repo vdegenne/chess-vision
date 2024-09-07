@@ -2,10 +2,10 @@ import {defineConfig} from 'vite';
 import {materialShell} from 'material-shell/vite.js';
 import {materialAll} from 'rollup-plugin-material-all';
 import {mdicon2svg} from 'vite-plugin-mdicon2svg';
-// import minifyLiterals from 'rollup-plugin-minify-template-literals';
-// import {minifyHtml} from '@vdegenne/rollup-plugin-minify-html';
+import minifyLiterals from 'rollup-plugin-minify-template-literals';
+import {minifyHtml} from '@vdegenne/rollup-plugin-minify-html';
 // import {viteSingleFile} from 'vite-plugin-singlefile';
-// import {VitePWA} from 'vite-plugin-pwa';
+import {VitePWA} from 'vite-plugin-pwa';
 
 export default defineConfig({
 	base: './',
@@ -51,43 +51,43 @@ export default defineConfig({
 
 		process.env.NODE_ENV === 'production'
 			? [
-					// minifyLiterals(),
-					// minifyHtml(),
+					minifyLiterals(),
+					minifyHtml(),
 					// viteSingleFile({
 					// 	useRecommendedBuildConfig: false,
 					// }),
 				]
 			: [],
 
-		// VitePWA({
-		// 	registerType: 'autoUpdate',
-		// 	includeAssets: ['*.{png,ico}', 'Roboto/**/*'],
-		// 	manifest: {
-		// 		icons: [
-		// 			{
-		// 				src: 'pwa-64x64.png',
-		// 				sizes: '64x64',
-		// 				type: 'image/png',
-		// 			},
-		// 			{
-		// 				src: 'pwa-192x192.png',
-		// 				sizes: '192x192',
-		// 				type: 'image/png',
-		// 			},
-		// 			{
-		// 				src: 'pwa-512x512.png',
-		// 				sizes: '512x512',
-		// 				type: 'image/png',
-		// 				purpose: 'any',
-		// 			},
-		// 			{
-		// 				src: 'maskable-icon-512x512.png',
-		// 				sizes: '512x512',
-		// 				type: 'image/png',
-		// 				purpose: 'maskable',
-		// 			},
-		// 		],
-		// 	},
-		// }),
+		VitePWA({
+			registerType: 'autoUpdate',
+			includeAssets: ['*.{png,ico}', 'Roboto/**/*'],
+			manifest: {
+				icons: [
+					{
+						src: 'pwa-64x64.png',
+						sizes: '64x64',
+						type: 'image/png',
+					},
+					{
+						src: 'pwa-192x192.png',
+						sizes: '192x192',
+						type: 'image/png',
+					},
+					{
+						src: 'pwa-512x512.png',
+						sizes: '512x512',
+						type: 'image/png',
+						purpose: 'any',
+					},
+					{
+						src: 'maskable-icon-512x512.png',
+						sizes: '512x512',
+						type: 'image/png',
+						purpose: 'maskable',
+					},
+				],
+			},
+		}),
 	],
 });

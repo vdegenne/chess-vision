@@ -1,5 +1,6 @@
 import {ReactiveController, state} from '@snar/lit';
-import {LitElement, html} from 'lit';
+import {LitElement} from 'lit';
+import {html, literal} from 'lit/static-html.js';
 import {ColorMode, withStyles} from 'lit-with-styles';
 import {customElement} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
@@ -8,6 +9,8 @@ import {saveToLocalStorage} from 'snar-save-to-local-storage';
 import {SUCCESS_AUDIO, WRONG_AUDIO} from '../assets/assets.js';
 import {type ThemeStore} from '../styles/styles.js';
 import styles from './app-shell.css?inline';
+import '@material/web/button/filled-button.js';
+import '@material/web/button/filled-tonal-button.js';
 
 declare global {
 	interface Window {
@@ -44,7 +47,6 @@ export class AppShell extends LitElement {
 		super();
 		appstate.bind(this);
 		appstate.updateComplete.then(async () => {
-			// console.log(appstate.coordQuestion);
 			if (!appstate.coordQuestion) {
 				appstate.pickNewCoordinate();
 			}
@@ -53,43 +55,61 @@ export class AppShell extends LitElement {
 			this.themeStore = themeStore;
 			themeStore.bind(this);
 		});
+
+		document.addEventListener('keydown', (event: KeyboardEvent) => {
+			if (event.key === ' ') {
+				appstate.pickNewCoordinate();
+			}
+		});
 	}
 
 	firstUpdated() {
 		materialShellLoadingOff.call(this);
-		// themeStore.bind(this);
 	}
 
 	render() {
 		const rows = appstate.flipped ? ROWS.slice() : ROWS.slice().reverse();
 		const cols = appstate.flipped ? COLUMNS.slice().reverse() : COLUMNS.slice();
 
+		const buttonType = appstate.userAnswer
+			? literal`md-filled-button`
+			: literal`md-filled-tonal-button`;
+
 		return html`
 			<div id="main-container">
 				<header>
-					<md-filled-button
+					<${buttonType}
+						?trailing-icon=${appstate.userAnswer}
 						?inert="${!appstate.userAnswer}"
 						@click=${() => {
 							appstate.pickNewCoordinate();
 						}}
 					>
-						<md-icon slot="icon">not_listed_location</md-icon>
-						${appstate.userAnswer
-							? 'New question'
-							: `Find ${appstate.coordQuestion}`}
-					</md-filled-button>
+						${
+							appstate.userAnswer
+								? html` <md-icon slot="icon">arrow_forward</md-icon>
+
+										New question`
+								: html` <md-icon slot="icon">not_listed_location</md-icon>
+										Find ${appstate.coordQuestion}`
+						}
+					</${buttonType}>
 					<div style="flex:1"></div>
 					<md-icon-button
 						@click=${() => (appstate.showCoords = !appstate.showCoords)}
 					>
-						${appstate.showCoords
-							? html`<md-icon>visibility</md-icon>`
-							: html`<md-icon>visibility_off</md-icon>`}
+						${
+							appstate.showCoords
+								? html`<md-icon>visibility</md-icon>`
+								: html`<md-icon>visibility_off</md-icon>`
+						}
 					</md-icon-button>
 					<md-icon-button @click="${() => this.themeStore?.toggleMode()}">
-						${this.themeStore?.colorMode === ColorMode.DARK
-							? html`<md-icon>dark_mode</md-icon>`
-							: html`<md-icon>light_mode</md-icon>`}
+						${
+							this.themeStore?.colorMode === ColorMode.DARK
+								? html`<md-icon>dark_mode</md-icon>`
+								: html`<md-icon>light_mode</md-icon>`
+						}
 					</md-icon-button>
 					<md-icon-button
 						@click=${() => (appstate.flipped = !appstate.flipped)}
@@ -136,6 +156,11 @@ export class AppShell extends LitElement {
 							</div>`;
 						});
 					})}
+				</div>
+				<div
+					style="color:var(--md-sys-color-outline-variant);font-size:90%;padding:8px;"
+				>
+					(shortcuts: ${'<space>'} new question)
 				</div>
 			</div>
 		`;
