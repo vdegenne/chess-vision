@@ -1,16 +1,16 @@
+import '@material/web/button/filled-button.js';
+import '@material/web/button/filled-tonal-button.js';
 import {ReactiveController, state} from '@snar/lit';
 import {LitElement} from 'lit';
-import {html, literal} from 'lit/static-html.js';
 import {ColorMode, withStyles} from 'lit-with-styles';
 import {customElement} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
+import {html, literal} from 'lit/static-html.js';
 import {materialShellLoadingOff} from 'material-shell';
 import {saveToLocalStorage} from 'snar-save-to-local-storage';
 import {SUCCESS_AUDIO, WRONG_AUDIO} from '../assets/assets.js';
 import {type ThemeStore} from '../styles/styles.js';
 import styles from './app-shell.css?inline';
-import '@material/web/button/filled-button.js';
-import '@material/web/button/filled-tonal-button.js';
 
 declare global {
 	interface Window {
