@@ -11,6 +11,7 @@ import {saveToLocalStorage} from 'snar-save-to-local-storage';
 import {SUCCESS_AUDIO, WRONG_AUDIO} from '../assets/assets.js';
 import {type ThemeStore} from '../styles/styles.js';
 import styles from './app-shell.css?inline';
+import {speakEnglish} from '@vdegenne/speech';
 
 declare global {
 	interface Window {
@@ -34,6 +35,7 @@ class AppState extends ReactiveController {
 	pickNewCoordinate() {
 		this.userAnswer = '';
 		this.coordQuestion = `${COLUMNS[Math.floor(Math.random() * 8)]}${ROWS[Math.floor(Math.random() * 8)]}`;
+		speakEnglish(this.coordQuestion);
 	}
 }
 const appstate = new AppState();
