@@ -5,7 +5,7 @@ import {state} from 'snar';
 import {saveToLocalStorage} from 'snar-save-to-local-storage';
 
 @saveToLocalStorage('sfc:theme')
-class ThemeStore extends ReactiveController {
+export class ThemeStore extends ReactiveController {
 	@state() colorMode = ColorMode.SYSTEM;
 	/**
 	 * When changing the following default value, we also have

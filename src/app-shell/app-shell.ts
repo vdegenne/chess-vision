@@ -5,9 +5,9 @@ import {customElement} from 'lit/decorators.js';
 import {classMap} from 'lit/directives/class-map.js';
 import {materialShellLoadingOff} from 'material-shell';
 import {saveToLocalStorage} from 'snar-save-to-local-storage';
-import {themeStore} from '../styles/styles.js';
-import styles from './app-shell.css?inline';
 import {SUCCESS_AUDIO, WRONG_AUDIO} from '../assets/assets.js';
+import {type ThemeStore} from '../styles/styles.js';
+import styles from './app-shell.css?inline';
 
 declare global {
 	interface Window {
@@ -38,6 +38,8 @@ const appstate = new AppState();
 @customElement('app-shell')
 @withStyles(styles)
 export class AppShell extends LitElement {
+	@state() themeStore: ThemeStore | undefined = undefined;
+
 	constructor() {
 		super();
 		appstate.bind(this);
@@ -47,11 +49,15 @@ export class AppShell extends LitElement {
 				appstate.pickNewCoordinate();
 			}
 		});
+		import('../styles/styles.js').then(({themeStore}) => {
+			this.themeStore = themeStore;
+			themeStore.bind(this);
+		});
 	}
 
 	firstUpdated() {
 		materialShellLoadingOff.call(this);
-		themeStore.bind(this);
+		// themeStore.bind(this);
 	}
 
 	render() {
@@ -80,8 +86,8 @@ export class AppShell extends LitElement {
 							? html`<md-icon>visibility</md-icon>`
 							: html`<md-icon>visibility_off</md-icon>`}
 					</md-icon-button>
-					<md-icon-button @click="${() => themeStore.toggleMode()}">
-						${themeStore.colorMode === ColorMode.DARK
+					<md-icon-button @click="${() => this.themeStore?.toggleMode()}">
+						${this.themeStore?.colorMode === ColorMode.DARK
 							? html`<md-icon>dark_mode</md-icon>`
 							: html`<md-icon>light_mode</md-icon>`}
 					</md-icon-button>
