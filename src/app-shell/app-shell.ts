@@ -158,7 +158,13 @@ export class AppShell extends LitElement {
 							? html`<md-icon>visibility</md-icon>`
 							: html`<md-icon>visibility_off</md-icon>`}
 					</md-icon-button>
-					${false
+					<md-icon-button
+						@click=${() => (appstate.flipped = !appstate.flipped)}
+					>
+						<md-icon>wifi_protected_setup</md-icon>
+					</md-icon-button>
+
+					${true
 						? html` <md-icon-button
 								@click="${() => this.themeStore?.toggleMode()}"
 							>
@@ -167,12 +173,6 @@ export class AppShell extends LitElement {
 									: html`<md-icon>light_mode</md-icon>`}
 							</md-icon-button>`
 						: null}
-					<md-icon-button
-						@click=${() => (appstate.flipped = !appstate.flipped)}
-					>
-						<md-icon>wifi_protected_setup</md-icon>
-					</md-icon-button>
-
 					<md-icon-button
 						@click=${async () => {
 							const dialog = await getSettingsDialog();
