@@ -39,7 +39,7 @@ export default defineConfig({
 			variant: 'rounded',
 			include: [
 				'src/**/*.ts',
-				// 'node_modules/@vdegenne/material-color-helpers/lib/elements/**/*.js',
+				'node_modules/@vdegenne/material-color-helpers/lib/elements/**/*.js',
 			],
 		}),
 
