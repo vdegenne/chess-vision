@@ -12,3 +12,5 @@ document.querySelector<HTMLElement>('material-shell').appendChild(app);
 
 import './global-listeners.js';
 import './material/material.js';
+import './material/outlined-field-patch.js';
+import './stats/success-failure-rate-linear-progress.js';

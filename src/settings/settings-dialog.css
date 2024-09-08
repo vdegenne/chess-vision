@@ -1,0 +1,27 @@
+md-dialog {
+	max-width: min(700px, 100vw);
+}
+md-list-item {
+	cursor: pointer;
+}
+md-outlined-text-field {
+	width: 100%;
+}
+
+md-chip-set {
+	margin-bottom: 12px;
+}
+
+h3 {
+	margin: 38px 0 12px;
+}
+h3:first-of-type {
+	margin-top: 0;
+}
+
+h4 {
+	margin: 24px 0 12px 6px;
+}
+h4:first-of-type {
+	margin-top: 12px;
+}

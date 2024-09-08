@@ -13,7 +13,7 @@ export class ThemeStore extends ReactiveController {
 	 * and also 'theme-color' meta tag in html header.
 	 * Material default theme seed is '#6750A4'
 	 */
-	@state() themeColor = '#6750A4';
+	@state() themeColor = '#00FF1E';
 
 	async updated(changed: PropertyValues) {
 		if (changed.has('colorMode')) {
@@ -29,6 +29,10 @@ export class ThemeStore extends ReactiveController {
 			0,
 		);
 		applyTheme(document, theme!);
+	}
+
+	get appliedColorScheme() {
+		return ThemeManager.appliedColorScheme;
 	}
 
 	toggleMode() {

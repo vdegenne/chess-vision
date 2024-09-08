@@ -32,7 +32,7 @@ export default defineConfig({
 	plugins: [
 		// inject shell scripts in header
 		materialShell({
-			// pathToDefaultMaterialStyleSheet: './src/styles/stylesheets/material.css',
+			pathToDefaultMaterialStyleSheet: './src/styles/stylesheets/material.css',
 		}),
 		materialAll(),
 		mdicon2svg({
