@@ -96,6 +96,8 @@ export const appstate = new AppState();
 export class AppShell extends LitElement {
 	@state() themeStore: ThemeStore | undefined = undefined;
 
+	@state() selectedSquare: string | undefined = undefined;
+
 	constructor() {
 		super();
 		appstate.bind(this);
@@ -265,6 +267,10 @@ export class AppShell extends LitElement {
 				}
       </${buttonType}>
     `;
+	}
+
+	selectSquare(file: File, rank: Rank) {
+		this.selectedSquare = `${file}${rank}`;
 	}
 }
 

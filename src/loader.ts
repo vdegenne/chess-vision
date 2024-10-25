@@ -14,3 +14,5 @@ import './global-listeners.js';
 import './material/material.js';
 import './material/outlined-field-patch.js';
 import './stats/success-failure-rate-linear-progress.js';
+
+import './gamepad.js';
